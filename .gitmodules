@@ -1,0 +1,3 @@
+[submodule "lib/Logger"]
+	path = lib/Logger
+	url = https://github.com/BuNaTin/Logger
