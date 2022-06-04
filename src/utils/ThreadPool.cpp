@@ -34,7 +34,9 @@ bool ThreadPool::calculated(int64_t task_id) {
     return false;
 }
 
-size_t ThreadPool::size() const noexcept { return threads.size(); }
+size_t ThreadPool::size() const noexcept {
+    return threads.size();
+}
 
 ThreadPool::~ThreadPool() {
     quite = true;
