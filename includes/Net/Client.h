@@ -4,25 +4,22 @@
 #include "Net/Port.h"
 #include "Net/ServerType.h"
 
-#include <functional>
 #include <memory>
+#include <string>
 
 namespace Cerelatis::Net {
 
-class Server {
+class Client {
     // interface
 public:
-    virtual bool setHandler(
-            std::function<std::string(const std::string &)> &&func) = 0;
-
-    virtual bool start() = 0;
+    virtual bool send(const std::string &data) = 0;
 
     // constructors
 public:
-    static std::unique_ptr<Server> create(ServerType = ServerType::TCP,
+    static std::unique_ptr<Client> create(ServerType = ServerType::TCP,
                                           Address = localhost,
                                           Port = 4321);
-    virtual ~Server() = default;
+    virtual ~Client() = default;
 };
 
 } // namespace Cerelatis::Net

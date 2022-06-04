@@ -21,7 +21,8 @@ void ThreadPool::wait_all() {
     std::unique_lock<std::mutex> lock(task_q_mtx);
     completed_task_ids_cv.wait(lock, [this]() -> bool {
         std::lock_guard<std::mutex> task_lock(completed_task_ids_mtx);
-        return task_queue.empty() && last_idx == completed_task_ids.size();
+        return task_queue.empty() &&
+               last_idx == completed_task_ids.size();
     });
 }
 
