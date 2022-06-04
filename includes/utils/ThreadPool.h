@@ -14,7 +14,7 @@ class ThreadPool {
     // interface
 public:
     template<typename Func, typename... Args>
-    int64_t addTask(const Func &task_func, Args &&... args);
+    int64_t addTask(const Func &task_func, Args &&...args);
 
     void wait(int64_t task_id);
     void wait_all();
@@ -43,16 +43,17 @@ private:
     std::vector<std::thread> threads;
 
     std::atomic<bool> quite{false};
-    std::atomic<int64_t> last_idx = 0;
+    std::atomic<int64_t> last_idx;
 };
 
 template<typename Func, typename... Args>
-int64_t ThreadPool::addTask(const Func &task_func, Args &&... args) {
+int64_t ThreadPool::addTask(const Func &task_func, Args &&...args) {
     int64_t task_idx = last_idx++;
 
     std::lock_guard<std::mutex> q_lock(task_q_mtx);
-    task_queue.emplace(std::async(std::launch::deferred, task_func, args...),
-              task_idx);
+    task_queue.emplace(
+            std::async(std::launch::deferred, task_func, args...),
+            task_idx);
     task_q_cv.notify_one();
     return task_idx;
 }
