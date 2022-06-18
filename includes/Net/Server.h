@@ -16,6 +16,7 @@ public:
             std::function<std::string(const std::string &)> &&func) = 0;
 
     virtual bool start() = 0;
+    virtual bool stop() = 0;
 
     // constructors
 public:
