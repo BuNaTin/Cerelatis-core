@@ -47,7 +47,7 @@ include_directories(
 
 add_library(${Project}
     STATIC
-        ${ALL_INCLUDES}
+    ${ALL_INCLUDES}
 )
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
